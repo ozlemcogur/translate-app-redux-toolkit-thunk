@@ -41,11 +41,14 @@ body {
     display: flex;
     gap: 18px;
     margin-top: 50px;
+    
 
     .select {
         flex:1;
-        color:black
+        color:black;
+        
     }
+    
 }
 
 .center {
@@ -62,16 +65,17 @@ body {
         max-height: 500px;
         padding: 10px;
         font-family: 'poppins';
-        font-size: 17px;
-       
+        font-size: 17px; 
     }
-
+    
     }
     
     .loading {
-        background-image: url('./tr-loading.webp') !important;
+        background-image: url('./Loading_icon.gif') !important;
+        
         background-size: cover !important;
         background-position: center !important;
+      
       }
 
 

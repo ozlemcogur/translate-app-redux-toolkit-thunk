@@ -10,39 +10,40 @@ function App() {
   const state = useSelector((store) => store.translateState)
   const [text, setText] = useState("")
   const [sourceLang, setSourceLang] = useState({
-    label:  "Turkish",
-    value : "tr"})
+    label: "Turkish",
+    value: "tr"
+  })
   const [targetLang, setTargetLang] = useState({
-    label :  "English",
-    value : "en"})
+    label: "English",
+    value: "en"
+  })
 
   const refinedData = useMemo(() => {
     return state.languages.map((i) => ({
-        value: i.code,
-        label: i.name
-      }))
-    }
-     , [state.languages])
+      value: i.code,
+      label: i.name
+    }))
+  }
+    , [state.languages])
 
   useEffect(() => {
     dispatch(getLanguages())
   }, [])
 
- const handleSwap = () =>{
-  setTargetLang(sourceLang)
-  setSourceLang(targetLang)
-  setText("")
-  dispatch(clearAnswer())
- }
+  const handleSwap = () => {
+    setTargetLang(sourceLang)
+    setSourceLang(targetLang)
+    setText("")
+    dispatch(clearAnswer())
+  }
 
   return (
     <div id="main-page">
       <div className="container">
         <h1>Çeviri + </h1>
-        {/* üst kısım*/}
         <div className="upper">
           <Select
-          value={sourceLang}
+            value={sourceLang}
             isDisabled={state.isLoading}
             onChange={setSourceLang}
             isLoading={state.isLoading}
@@ -52,20 +53,18 @@ function App() {
             değiş
           </button>
           <Select
-          value={targetLang}
+            value={targetLang}
             isDisabled={state.isLoading}
             onChange={setTargetLang}
             isLoading={state.isLoading}
             className="select"
             options={refinedData} />
         </div>
-        {/* orta kısım*/}
         <div className="center">
           <textarea value={text} onChange={(e) => setText(e.target.value)} placeholder="çevirmek istediğiniz yazıyı giriniz"></textarea>
           <textarea className={state.isTextLoading ? "loading" : ""} value={state.answer} disabled></textarea>
         </div>
-        {/* aly kısım*/}
-        <button onClick={()=>{dispatch(translateText({sourceLang,targetLang,text}))}} id="translate-btn">Çevir</button>
+        <button onClick={() => { dispatch(translateText({ sourceLang, targetLang, text })) }} id="translate-btn">Çevir</button>
       </div>
     </div>
   )
